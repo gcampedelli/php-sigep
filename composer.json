@@ -27,7 +27,7 @@
     },
     "license": "MIT",
     "repositories": {
-        "stavarengo/php-sigep-fpdf": {
+        "trezo/php-sigep-fpdf": {
             "type": "git",
             "url": "https://github.com/trezoteam/php-sigep-fpdf.git"
         }
