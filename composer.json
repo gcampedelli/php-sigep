@@ -18,12 +18,18 @@
     "require": {
         "php": ">=5.4",
         "ext-soap": "*",
-        "stavarengo/php-sigep-fpdf": "dev-master"
+        "trezo/php-sigep-fpdf": "dev-master"
     },
     "autoload": {
         "psr-0": {
             "PhpSigep": "src/"
         }
     },
-    "license": "MIT"
+    "license": "MIT",
+    "repositories": {
+        "stavarengo/php-sigep-fpdf": {
+            "type": "git",
+            "url": "https://github.com/trezoteam/php-sigep-fpdf.git"
+        }
+    }
 }
