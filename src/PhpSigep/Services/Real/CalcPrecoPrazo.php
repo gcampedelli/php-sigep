@@ -111,14 +111,12 @@ class CalcPrecoPrazo
             $r = SoapClientFactory::getSoapCalcPrecoPrazo()->calcPrecoPrazo($soapArgs);
         } catch (\Exception $e) {
             $message = $e->getMessage();
-            if ($message == 'Service Unavailable') {
-                if (!self::$calcPrecosPrazosServiceUnavailable) {
-                    //Tenta mais uma vez
-                    self::$calcPrecosPrazosServiceUnavailable = true;
-                    sleep(1);
+            if (!self::$calcPrecosPrazosServiceUnavailable) {
+                //Tenta mais uma vez
+                self::$calcPrecosPrazosServiceUnavailable = true;
+                sleep(1);
 
-                    return $this->calcPrecoPrazo($params);
-                }
+                return SoapClientFactory::getSoapCalcPrecoPrazo()->calcPrecoPrazo($params);
             }
             if ($e instanceof \SoapFault) {
                 $result->setIsSoapFault(true);
@@ -135,6 +133,12 @@ class CalcPrecoPrazo
         }
 
         $retorno = array();
+
+        if(!isset($r)) {
+            $result->setErrorMsg('O correios está fora do ar');
+            return $result;
+        }
+
         if (is_object($r) && property_exists($r, 'CalcPrecoPrazoResult') && is_object($r->CalcPrecoPrazoResult)
             && $r->CalcPrecoPrazoResult->Servicos && is_object($r->CalcPrecoPrazoResult->Servicos)
         ) {
