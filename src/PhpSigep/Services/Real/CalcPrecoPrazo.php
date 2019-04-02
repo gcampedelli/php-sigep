@@ -114,9 +114,6 @@ class CalcPrecoPrazo
             if (!self::$calcPrecosPrazosServiceUnavailable) {
                 //Tenta mais uma vez
                 self::$calcPrecosPrazosServiceUnavailable = true;
-                sleep(1);
-
-                return SoapClientFactory::getSoapCalcPrecoPrazo()->calcPrecoPrazo($params);
             }
             if ($e instanceof \SoapFault) {
                 $result->setIsSoapFault(true);
